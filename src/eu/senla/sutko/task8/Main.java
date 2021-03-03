@@ -5,15 +5,24 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-           // MyArrayList<Integer> dd = new MyArrayList<>();
 
 
-            MyArrayList<String> qq= new MyArrayList<>(12);
-            qq.add(0,"паца");
-            qq.add(1,"dw");
 
-            System.out.println(qq.getSize());
-            System.out.println(qq.get(0));
+            MyArrayList<Integer> dd = new MyArrayList<>(12);
+            for (int i =0; i< dd.getCapacity();i++){
+                dd.add(i,i);
+                System.out.println("Размер " +  dd.getSize());
+                System.out.println("Значение "+ dd.get(i));
+            }
+
+             System.out.println("В массиве dd элементов "+dd.getSize());
+
+            dd.add(13,1);
+        System.out.println("В массиве dd элементов "+dd.getSize());
+        System.out.println(dd.getCapacity());
+
+
+
 
 
 
