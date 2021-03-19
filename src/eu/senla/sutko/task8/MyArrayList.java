@@ -23,7 +23,7 @@ public class MyArrayList<T>  implements  MyList<T>{
 
     MyArrayList() //создает пустой список
     {
-        Arr = (T[]) new Object();
+        Arr = (T[]) new Object [0];
 
     }
 
@@ -37,21 +37,6 @@ public class MyArrayList<T>  implements  MyList<T>{
        this.Capacity=capacity;
        Arr = (T[]) new Object[Capacity];
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void add(int index, T o) {
@@ -80,67 +65,31 @@ public class MyArrayList<T>  implements  MyList<T>{
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override// возвращает объект из списка по индексу index ЕСТЬ
     public T get(int index) {
-        return Arr[index];
+
+        try {
+            return Arr[index];
+        }catch (ArrayIndexOutOfBoundsException ex){
+            ex.printStackTrace();
+            System.out.println("Вышли за предел массива");;
+        }return null;
+
     }
-
-
-
-
 
     @Override // возвращает индекс первого вхождения объекта obj в список. Если объект не найден, то возвращается -1
     public int indexOf(Object obj) {
         return 0;
     }
-
-
-
-
     @Override//возвращает индекс последнего вхождения объекта obj в список. Если объект не найден, то возвращается -1
     public int lastIndexOf(Object obj) {
         return 0;
     }
 
-
-
-
-
-
-
-
-
-
-
-
     @Override// возвращает объект ListIterator для обхода элементов списка ECTЬ
     public MyIterator <T> listIterator() {
         return new MyIterator<>(Arr);
     }
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     // удаляет объект из списка по индексу index, возвращая при этом удаленный объект
@@ -149,13 +98,16 @@ public class MyArrayList<T>  implements  MyList<T>{
 
     }
 
-
-
-
     @Override// присваивает значение объекта obj элементу, который находится по индексу index ECTb
-    public Object set(int index, Object obj) {
-        Arr[index]=(T) obj;
-        return obj;
+    public T set(int index, T obj) {
+        try {
+            Arr[index]=(T) obj;
+            return obj;
+        }catch (ArrayIndexOutOfBoundsException ex){
+            ex.printStackTrace();
+            System.out.println("Вышли за предел массива");;
+        }return null;
+
     }
 
     @Override// сортирует список с помощью компаратора comp
