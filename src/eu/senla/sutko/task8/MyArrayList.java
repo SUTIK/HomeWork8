@@ -1,31 +1,29 @@
 package eu.senla.sutko.task8;
-
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
 public class MyArrayList<T>  implements  MyList<T>{
 
-    public int getCapacity() {
-        return Capacity;
-    }
 
-    private int Capacity=10;
-
-    public int getSize() {
-        return Size;
-    }
-
-    public T[] getArr() {
-        return Arr;
-    }
-
-    private int Size=0;
     private T [] Arr ;
+    private int Capacity=10;
+    private int Size=0;
+
+
+
+
+
+
+
+
+
+
 
     MyArrayList() //создает пустой список
     {
-        Arr = (T[]) new Object[Capacity];
+        Arr = (T[]) new Object();
 
     }
 
@@ -42,31 +40,38 @@ public class MyArrayList<T>  implements  MyList<T>{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public void add(int index, T o) {
-
-        if  (index>Capacity-1) {
-                T[] Arr1 = (T[]) new Object[Capacity + Capacity / 2];//создаем новый массив в 1,5р ольше
-                for (int i = 0; i < Arr.length; i++) {
-                    Arr1[i] = Arr[i]; //пререкладывае мзначения в новый массив
-                }
-                System.out.println("Создали Arr1 и переложили");
-                T Arr [] = (T[]) new Object[Arr1.length];
-                for (int i = 0; i < Arr1.length; i++) {
-                Arr[i] = Arr1[i]; //пререкладывае обратно
-
-
-                }
-            System.out.println("НОВЫЙ  Arr  создан");
-                Capacity = Arr.length;
-                Arr[index]=o;
-                Size++;
-
-        }
-        else {
         Arr[index]=o;
-        Size++;}
+    }
 
+    @Override
+    public boolean add(T obj) {
+        try {
+            T[] tempArr = Arr;
+            Arr=(T[]) new Object[tempArr.length+1];
+            for (int i = 0; i< tempArr.length;i++){
+                Arr[i]= tempArr[i];
+            }
+            Arr [Arr.length-1]=obj;
+            return true;
+        } catch (ClassCastException ex){
+            ex.printStackTrace();
+            }
+        return false;
     }
 
 
@@ -75,43 +80,85 @@ public class MyArrayList<T>  implements  MyList<T>{
         return false;
     }
 
-    @Override
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Override// возвращает объект из списка по индексу index ЕСТЬ
     public T get(int index) {
         return Arr[index];
     }
 
-    @Override
+
+
+
+
+    @Override // возвращает индекс первого вхождения объекта obj в список. Если объект не найден, то возвращается -1
     public int indexOf(Object obj) {
         return 0;
     }
 
-    @Override
+
+
+
+    @Override//возвращает индекс последнего вхождения объекта obj в список. Если объект не найден, то возвращается -1
     public int lastIndexOf(Object obj) {
         return 0;
     }
 
-    @Override
-    public ListIterator listIterator() {
-        return null;
+
+
+
+
+
+
+
+
+
+
+
+    @Override// возвращает объект ListIterator для обхода элементов списка ECTЬ
+    public MyIterator <T> listIterator() {
+        return new MyIterator<>(Arr);
     }
 
+
+
+
+
+
+
+
+
+
+
+
     @Override
-    // удаляет объект из списка по индексу index, возвращая при этом
-    //удаленный объект
+    // удаляет объект из списка по индексу index, возвращая при этом удаленный объект
     public T remove(int index) {
-
         return null;
+
     }
 
 
 
 
-    @Override
+    @Override// присваивает значение объекта obj элементу, который находится по индексу index ECTb
     public Object set(int index, Object obj) {
-        return null;
+        Arr[index]=(T) obj;
+        return obj;
     }
 
-    @Override
+    @Override// сортирует список с помощью компаратора comp
     public void sort(Comparator comp) {
 
     }
@@ -120,4 +167,10 @@ public class MyArrayList<T>  implements  MyList<T>{
     public List subList(int start, int end) {
         return null;
     }
+
+    @Override
+    public int size() {
+        return Arr.length;
+    }
 }
+

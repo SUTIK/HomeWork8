@@ -9,6 +9,9 @@ public interface MyList<T> {
 
     void add(int index, T obj); //добавляет в список по индексу index объект obj
 
+
+    boolean add(T obj);
+
     boolean addAll(int index, MyList<? extends T> col);// добавляет в список по индексу index все
     //элементы коллекции col. Если в результате добавления список был изменен, то
     //возвращается true, иначе возвращается false
@@ -21,7 +24,7 @@ public interface MyList<T> {
     int lastIndexOf(Object obj);// возвращает индекс последнего вхождения объекта obj в список.
     //Если объект не найден, то возвращается -1
 
-    ListIterator<T> listIterator ();// возвращает объект ListIterator для обхода элементов списка
+    MyIterator<T> listIterator ();// возвращает объект ListIterator для обхода элементов списка
 
     static <T> List<T> of(T... objects)// создает из набора элементов объект List
     {
@@ -34,7 +37,11 @@ public interface MyList<T> {
     T set(int index, T obj);// присваивает значение объекта obj элементу, который находится по
     //индексу index
     void sort(Comparator<? super T> comp);// сортирует список с помощью компаратора comp
+
+
     List<T> subList(int start, int end);
+
+    int size ();
 
 
 
