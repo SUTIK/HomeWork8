@@ -9,17 +9,6 @@ public class MyArrayList<T>  implements  MyList<T>{
 
     private T [] Arr ;
     private int Capacity=10;
-    private int Size=0;
-
-
-
-
-
-
-
-
-
-
 
     MyArrayList() //создает пустой список
     {
@@ -100,17 +89,31 @@ public class MyArrayList<T>  implements  MyList<T>{
     @Override
     // удаляет объект из списка по индексу index, возвращая при этом удаленный объект
     public T remove(int index) {
-        T[] tempArr = Arr;
-        Arr=(T[]) new Object[tempArr.length-1];
-        for (int i =0;i<index-1;i++){
-            Arr[i]=tempArr[i];
+        T t = Arr[index];
+        try {
+            T[] tempArr = Arr;
+            Arr = (T[]) new Object[tempArr.length - 1];
+            for (int i = 0; i < index; i++) {
+                Arr[i] = tempArr[i];
+            }
+            for (int i = index+1; i < tempArr.length; i++) {
+                Arr[i-1] = tempArr[i];
+            }
+        }catch (ArrayIndexOutOfBoundsException ex) {
+            ex.printStackTrace();
+            System.out.println("в массиве нет такого индекса");
         }
-        for (int i =index+1;i< tempArr.length-1;i++){
-            Arr[i]=tempArr[i];
+        catch (ClassCastException ex1){
+            ex1.printStackTrace();
         }
-        return Arr[index];
 
-    }
+
+        return t;
+
+        }
+
+
+
 
     @Override// присваивает значение объекта obj элементу, который находится по индексу index ECTb
     public T set(int index, T obj) {
