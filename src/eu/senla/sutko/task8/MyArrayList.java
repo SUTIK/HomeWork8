@@ -40,7 +40,13 @@ public class MyArrayList<T>  implements  MyList<T>{
 
     @Override
     public void add(int index, T o) {
-        Arr[index]=o;
+        try {
+            Arr[index]=o;
+        }catch (ArrayIndexOutOfBoundsException ex){
+            ex.printStackTrace();
+            System.out.println("элемента с таким индексом не существует");
+        }
+
     }
 
     @Override
@@ -65,17 +71,17 @@ public class MyArrayList<T>  implements  MyList<T>{
         return false;
     }
 
+
     @Override// возвращает объект из списка по индексу index ЕСТЬ
     public T get(int index) {
-
         try {
             return Arr[index];
         }catch (ArrayIndexOutOfBoundsException ex){
             ex.printStackTrace();
             System.out.println("Вышли за предел массива");;
         }return null;
-
     }
+
 
     @Override // возвращает индекс первого вхождения объекта obj в список. Если объект не найден, то возвращается -1
     public int indexOf(Object obj) {
@@ -94,7 +100,15 @@ public class MyArrayList<T>  implements  MyList<T>{
     @Override
     // удаляет объект из списка по индексу index, возвращая при этом удаленный объект
     public T remove(int index) {
-        return null;
+        T[] tempArr = Arr;
+        Arr=(T[]) new Object[tempArr.length-1];
+        for (int i =0;i<index-1;i++){
+            Arr[i]=tempArr[i];
+        }
+        for (int i =index+1;i< tempArr.length-1;i++){
+            Arr[i]=tempArr[i];
+        }
+        return Arr[index];
 
     }
 

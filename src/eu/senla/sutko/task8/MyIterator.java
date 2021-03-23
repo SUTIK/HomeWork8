@@ -11,7 +11,6 @@ public class MyIterator <T> implements Iterator<T> {
         this.massiv = massiv;
     }
 
-
     @Override
     public boolean hasNext() {
         return i< massiv.length;
